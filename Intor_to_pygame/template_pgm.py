@@ -6,7 +6,7 @@ https://www.rapidtables.com/web/color/RGB_Color.html
 '''
 
 import pygame
-
+import os
 # Define some colors
 
 BLACK = (0,0,0)
@@ -19,7 +19,7 @@ YELLOW = (255, 255, 0)
 pygame.init()
 
 # Set the WIDTH and the HEIGHT for the screen
-
+os.environ['SDL_VIDEO_WINDOW_POS'] = '20,50'
 WIDTH = 1200
 HEIGHT = 700
 size = ( WIDTH, HEIGHT)
