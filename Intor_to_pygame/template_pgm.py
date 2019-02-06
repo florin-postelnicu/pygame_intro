@@ -18,8 +18,10 @@ YELLOW = (255, 255, 0)
 
 pygame.init()
 
-# Set the WIDTH and the HEIGHT for the screen
+# this sets the upper left corner of the window at (x =20, y = 50). The point (x =0, y = 0) is
+# the Upper Left corner of the screen
 os.environ['SDL_VIDEO_WINDOW_POS'] = '20,50'
+# Set the WIDTH and the HEIGHT for the screen
 WIDTH = 1200
 HEIGHT = 700
 size = ( WIDTH, HEIGHT)
