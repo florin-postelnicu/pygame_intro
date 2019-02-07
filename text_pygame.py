@@ -6,6 +6,17 @@ than it should be converted to a string
 
  For pygame.draw check :
  https://www.pygame.org/docs/ref/draw.html#pygame.draw.rect
+ 
+pygame.draw.rect()
+draw a rectangle shape
+
+rect(Surface, color, Rect, width=0) -> Rect
+
+Draws a rectangular shape on the Surface. The given Rect is the area of the rectangle. 
+The width argument is the thickness to draw the outer edge. If width is zero then the rectangle will be filled.
+
+Keep in mind the Surface.fill() method works just as well for drawing filled rectangles. 
+In fact the Surface.fill() can be hardware accelerated on some platforms with both software and hardware display modes.
 '''
 import pygame
 import os
