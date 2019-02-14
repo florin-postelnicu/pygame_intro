@@ -31,7 +31,7 @@ def blinking():
             columny = (pos[0] - LETTER_BOX[0]) // WIDTH_LETTER_BOX
             rowx = (pos[1] - LETTER_BOX[1]) // HEIGHT_LETTER_BOX
             # imagebs = screen.blit(YELLOW_SQUARE, (50 + 50 * columny, 550 + 50 * rowx))
-            imagebs = pygame.draw.rect(screen, (255,255,0, 128), [50 + 50 * columny, 550 + 50 * rowx, 50,50], 10)
+            imagebs = pygame.draw.rect(screen, (128,255,128, 70), [50 + 50 * columny, 550 + 50 * rowx, 50,50], 8)
             return imagebs
 
 
@@ -117,11 +117,10 @@ while not done:
     screen.blit(draw_text(str(something)), [250, 250])
 
     # Draw each letter of the alphabet on the corresponding location
-
-
+    blinking()
     for row in range(2):
         for column in range(13):
-            blinking()
+            # blinking()
             screen.blit(draw_text(grid[row][column]), [50 + 50 * column, 550 + 50 * row])
 
     pygame.display.flip()
