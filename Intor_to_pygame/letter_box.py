@@ -25,13 +25,14 @@ def draw_text(text):
 
 def blinking():
 
-        if event.type == pygame.MOUSEMOTION:
-            pos = pygame.mouse.get_pos()
-            if pos[0] >= 50 and pos[0] <= 700 and pos[1] >= 550 and pos[1] <= 650:
-                columny = (pos[0] - LETTER_BOX[0]) // WIDTH_LETTER_BOX
-                rowx = (pos[1] - LETTER_BOX[1]) // HEIGHT_LETTER_BOX
-                imagebs = screen.blit(YELLOW_SQUARE, (50 + 50 * columny, 550 + 50 * rowx))
-                return imagebs
+    if event.type == pygame.MOUSEMOTION:
+        pos = pygame.mouse.get_pos()
+        if pos[0] >= 50 and pos[0] <= 700 and pos[1] >= 550 and pos[1] <= 650:
+            columny = (pos[0] - LETTER_BOX[0]) // WIDTH_LETTER_BOX
+            rowx = (pos[1] - LETTER_BOX[1]) // HEIGHT_LETTER_BOX
+            # imagebs = screen.blit(YELLOW_SQUARE, (50 + 50 * columny, 550 + 50 * rowx))
+            imagebs = pygame.draw.rect(screen, (255,255,0, 128), [50 + 50 * columny, 550 + 50 * rowx, 50,50], 10)
+            return imagebs
 
 
 BLACK = (0, 0, 0)
@@ -105,9 +106,10 @@ while not done:
 
     # --------Drawing code should go here
     # rect1 is for the secret word
-    rect1 = pygame.draw.rect(screen, YELLOW, [200, 200, 400, 100], 5)
+
+    rect1 = pygame.draw.rect(screen, YELLOW, [200, 200, 700, 100], 5)
     # rect 2 is LETTER_BOX
-    rect2 = pygame.draw.rect(screen, RED, [50, 550, 650, 100], 1)
+    rect2 = pygame.draw.rect(screen, RED, [LETTER_BOX[0],LETTER_BOX[1], 13*WIDTH_LETTER_BOX, 2*HEIGHT_LETTER_BOX], 1)
 
     # ---------Update thje screen with what we have drawn
     # ---------Put the image of the text on the screen at 250 x250
@@ -121,6 +123,7 @@ while not done:
         for column in range(13):
             blinking()
             screen.blit(draw_text(grid[row][column]), [50 + 50 * column, 550 + 50 * row])
+
     pygame.display.flip()
 
     # ------Limit 60 frames per second
