@@ -53,7 +53,7 @@ for row in range(2):
     # in this row
     grid.append([])
     for column in range(13):
-        grid[row].append(0)  # Append a cell
+        grid[row].append(LETTERS[row][column])  # Append a cell
 # Loop until the user clicks the close button
 done = False
 # Use how fast the screen updates
@@ -77,7 +77,7 @@ while not done:
                 row = pos[1] // HEIGHT_LETTER_BOX - 11
                 # # Set that location to one
                 # grid[row][column] = 1
-                print("Click ", pos, "Grid coordinates: ", row, column, 'letter is ', LETTERS[row][column])
+                print("Click ", pos, "Grid coordinates: ", row, column, 'letter is ', LETTERS[row][column], 'grid ', grid[row][column])
 
     # Game Logic should go here
     something = datetime.datetime.now()
@@ -95,7 +95,9 @@ while not done:
     screen.fill(WHITE)
 
     #--------Drawing code should go here
+    # rect1 is for the secret word
     rect1 = pygame.draw.rect(screen, YELLOW, [200,200, 400, 100],5)
+    # rect 2 is LETTER_BOX
     rect2 = pygame.draw.rect(screen, RED, [50, 550, 650,100],1)
 
 
@@ -104,8 +106,9 @@ while not done:
     # ---------Put the image of the text on the screen at 250 x250
 
     screen.blit(draw_text(str(something)), [250, 250])
-    # screen.blit(draw_text('ABCDEFGHIJKLM'), [50, 550])
-    # screen.blit(draw_text('NOPQRSTUVWXYZ'), [50,600])
+    
+  # Draw each letter of the alphabet on the corresponding location
+  
     for row in range(2):
         for column in range(13):
             screen.blit(draw_text(LETTERS[row][column]),[ 50 +50*column, 550 + 50*row])
