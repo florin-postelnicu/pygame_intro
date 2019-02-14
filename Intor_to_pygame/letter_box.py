@@ -77,7 +77,7 @@ while not done:
                 row = pos[1] // HEIGHT_LETTER_BOX - 11
                 # # Set that location to one
                 # grid[row][column] = 1
-                print("Click ", pos, "Grid coordinates: ", row, column, 'letter is ', LETTERS[row][column], 'grid ', grid[row][column])
+                print("Click ", pos, "Grid coordinates: ", row, column, 'letter is ', grid[row][column])
 
     # Game Logic should go here
     something = datetime.datetime.now()
@@ -111,7 +111,7 @@ while not done:
   
     for row in range(2):
         for column in range(13):
-            screen.blit(draw_text(LETTERS[row][column]),[ 50 +50*column, 550 + 50*row])
+            screen.blit(draw_text(grid[row][column]),[ 50 +50*column, 550 + 50*row])
     pygame.display.flip()
 
     #------Limit 60 frames per second
