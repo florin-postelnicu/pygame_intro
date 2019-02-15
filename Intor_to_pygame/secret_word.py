@@ -14,6 +14,7 @@ import random
 
 
 
+
 def draw_text(text, font_size):
     # Select the font to use, size, bold, italics
     font = pygame.font.SysFont('Times New Roman', font_size, True, False)
@@ -57,8 +58,8 @@ class Grid(pygame.sprite.Sprite):
             self.table.append([])
             for column in range(13):
                 self.table[row].append(LETTERS[row][column])  # Append a cell
-    # @staticmethod
-    def blinking (self):
+    @staticmethod
+    def blinking ():
         if event.type == pygame.MOUSEMOTION:
             pos = pygame.mouse.get_pos()
             if pos[0] >= 50 and pos[0] <= 700 and pos[1] >= 550 and pos[1] <= 650:
@@ -66,24 +67,32 @@ class Grid(pygame.sprite.Sprite):
                 rowx = (pos[1] - LETTER_BOX[1]) // HEIGHT_LETTER_BOX
                 pygame.draw.rect(screen, (255,25,255, 70), [50 + 50 * columny, 550 + 50 * rowx, 50,50], 8)
 
-
     def drawgrid(self):
         for row in range(2):
             for column in range(13):
                 screen.blit(draw_text(self.table[row][column], 50), [50 + 50 * column, 550 + 50 * row])
 
-    def update(self):
-        self.blinking()
+    def guess(self):
+        pygame.time.delay(200)
         if event.type == pygame.MOUSEBUTTONDOWN:
+            pygame.time.delay(350)
             # User clicks the mouse. Get the position
             pos = pygame.mouse.get_pos()
             if pos[0] >= 50 and pos[0] <= 700 and pos[1] >= 550 and pos[1] <= 650:
                 # Change the x/y screen coordinates to grid coordinates
                 column = (pos[0] - LETTER_BOX[0]) // WIDTH_LETTER_BOX
                 row = (pos[1] - LETTER_BOX[1]) // HEIGHT_LETTER_BOX
-                # # Set that location to one
-                # grid[row][column] = 1
-                print("Click ", pos, "Grid coordinates: ", row, column, 'letter is ', self.table[row][column])
+                # self.table[row][column] is the data needed for  guess
+                # self.guess = self.table[row][column]
+
+                return print(self.table[row][column])
+
+
+    def update(self):
+        Grid.blinking()
+        self.guess()
+
+
 
 
 # Define some colors
@@ -135,7 +144,7 @@ while not done:
     #  above this , or they will be erased with this command
 
     # If you want a background image, replace this clear with
-    
+
     screen.blit(BckG.image, BckG.rect)
 
     # --------Drawing code should go here
@@ -151,7 +160,7 @@ while not done:
     screen.blit(draw_text(str(word.upper()), 50), [60, 420])
 
     # Draw each letter of the alphabet on the corresponding location
-    Grid.blinking(grid1)
+    Grid.blinking()
     Grid.drawgrid(grid1)
     # for row in range(2):
     #     for column in range(13):
