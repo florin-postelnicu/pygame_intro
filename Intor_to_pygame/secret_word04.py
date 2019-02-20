@@ -11,7 +11,7 @@ import os
 import pickle
 from hangman_list import text_w
 import random
-global new_name
+
 #
 # history = {'Anonymous': (0,0)}
 # f1 = open('historydict,p', 'wb')
@@ -60,9 +60,9 @@ class InputBox:
         if event.type == pygame.KEYDOWN:
             if self.active:
                 if event.key == pygame.K_RETURN:
-                    player1 = Player
+                    player1 = Player()
                     player1.name = self.text
-                    Player.greetings(player1)
+                    player1.greetings()
                     # return self.text
 
 
@@ -107,7 +107,7 @@ class Gallows(pygame.sprite.Sprite):
 
 
 class Grid(pygame.sprite.Sprite):
-    pygame.init()
+    # pygame.init()
     global LETTER_BOX, WIDTH_LETTER_BOX, HEIGHT_LETTER_BOX, LETTERS
     LETTER_BOX = (50, 550)
     WIDTH_LETTER_BOX = 50
@@ -140,9 +140,6 @@ class Grid(pygame.sprite.Sprite):
                 screen.blit(draw_text(self.table[row][column], 50), [50 + 50 * column, 550 + 50 * row])
 
     def guess(self):
-
-
-
             # User clicks the mouse. Get the position
             pos = pygame.mouse.get_pos()
             if pos[0] >= 50 and pos[0] <= 700 and pos[1] >= 550 and pos[1] <= 650:
@@ -152,10 +149,7 @@ class Grid(pygame.sprite.Sprite):
                 # self.table[row][column] is the data needed for  guess
                 # self.guess = self.table[row][column]
                 print((self.table[row][column]))
-
                 return self.table[row][column]
-
-
 
 
     def update(self):
@@ -172,16 +166,9 @@ class Player(object) :
 
     def greetings(self):
         Player.get_warrior_infos(self)
-
-
-        print(self.name)
+        print('from the class Player', self.name)
         history = Player.get_warrior_infos(self)
 
-        #  Check if the name is in the history.names
-        # Use get_warrior_infos()
-
-        # if  self.name != None :
-        #     print("YOUUUUU")
         if self.name in history.keys():
             self.battles = history[self.name][0]
             self.victories = history[self.name][1]
@@ -194,31 +181,21 @@ class Player(object) :
             f1 = open('historydict,p', 'wb')
             pickle.dump(history, f1)
             f1.close()
-
-            # print("Sorry valiant warrior, but we don't believe in Fairy Tales, \n"
-            #       " however,  \n we want you to prove yourself and get into"
-            #       " our history book. Good Luck!")
             Player.update_warrior(self, vic=None)
-        Player.print_stats(self)
-
         print("History book : \n", history)
 
     # Define Getters
 
     def get_warrior_infos(self):
-        # Read the file "historydict", and return the dictionary history
         f1 = open('historydict,p', 'rb')
         history = pickle.load(f1)
         f1.close()
         return history
 
-    # Define Setters For newbies
     def set_warrior_infos(self):
-        # print("What's your story {}  warrior? \n".format(self.name))
         self.battles =0
-        # int(input("Enter your skirmishes big warrior \n"))
         self.victories =0
-        # int(input("Enter the number of annihilated enemies \n"))
+
 
     def print_stats(self):
         print("Warrior ", self.name)
@@ -301,6 +278,10 @@ while not done:
 
             # Player.greetings(player1)
             Grid.update(grid1)
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_DOWN :
+
+                print('from the main loop', Player().name)
 
 
 
