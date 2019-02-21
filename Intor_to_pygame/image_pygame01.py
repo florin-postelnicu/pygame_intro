@@ -1,7 +1,7 @@
 '''
-Pygame base template for opening  a window
-Colors Chart (RGB)
-https://www.rapidtables.com/web/color/RGB_Color.html
+use an image as a background for the game;
+Between the pygame.init() and main loop place :
+name_of_picture = os.path.joinI
 
 '''
 
