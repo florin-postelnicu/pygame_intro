@@ -56,9 +56,13 @@ pygame.display.set_caption('Template for Pygame Programs')
 done = False
 # Use how fast the screen updates
 clock = pygame.time.Clock()
-
+# create a path to join the folder 'images' with the file 'kitten.png
 ktn = os.path.join('images', 'kitten.png')
+# Make the background of the kitten sprite transparent using .convert_alpha()
 miau = pygame.image.load(ktn).convert_alpha()
+# use transformations to flip the kitten on the x_axis, by making True
+# the corresponding field, and False the other
+# pygame.transform.flip( image, flip_x, flip_y)
 miau = pygame.transform.flip( miau, True, False )
 
 bg = os.path.join('images', 'bkg.jpg')
