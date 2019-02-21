@@ -1,7 +1,31 @@
 '''
-use an image as a background for the game;
-Between the pygame.init() and main loop place :
-name_of_picture = os.path.joinI
+1) Loading images for your program should br donr after
+pygame.init()
+
+but before the main loop
+while not done:
+
+2) Organize all your images in a folder named images, or what you want.
+Before downloading an image from this folder, for example img1.png  from
+folder images, you need to import os.
+Make a variable var1
+
+var1 = os.path.join("images , 'img1.png)
+
+ such that, you create a path from img1.png and your program.
+
+ Then you need to load that image:
+
+  iamge1 = pygame.image.load(var1)
+
+  If your image is a background , than you need to remove
+  screen.fill(COLOR)
+  with
+  screen.blit(image1)
+
+  If the image needs to be blit to another place( it might be a sprite representing
+  a player, or an enemy, etc) , you have to do it in the drawing area of your main loop
+
 
 '''
 
@@ -32,6 +56,11 @@ pygame.display.set_caption('Template for Pygame Programs')
 done = False
 # Use how fast the screen updates
 clock = pygame.time.Clock()
+
+ktn = os.path.join('images', 'kitten.png')
+miau = pygame.image.load(ktn).convert_alpha()
+miau = pygame.transform.flip( miau, True, False )
+
 bg = os.path.join('images', 'bkg.jpg')
 BckG = pygame.image.load(bg)
 #--------------Main Program Loop -------------
@@ -55,6 +84,7 @@ while not done:
 
     #--------Drawing code should go here
     # blit the gallows here
+    screen.blit(miau, (450, 340))
 
     #---------Update thje screen with what we have drawn
     pygame.display.flip()
