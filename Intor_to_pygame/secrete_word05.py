@@ -12,12 +12,11 @@ import pickle
 from hangman_list import text_w
 import random
 
-
-history = {'Anonymous': (0,0)}
-f1 = open('historydict,p', 'wb')
-pickle.dump(history, f1)
-f1.close()
-
+#
+# history = {'Anonymous': (0,0)}
+# f1 = open('historydict,p', 'wb')
+# pickle.dump(history, f1)
+# f1.close()
 
 
 def draw_text(text, font_size):
@@ -33,12 +32,7 @@ def draw_text(text, font_size):
 # Classes
 
 
-
-
-
 class InputBox(object):
-
-
 
     def __init__(self,x, y, w, h, text=''):
         self.rect = pygame.Rect(x, y, w, h)
@@ -47,7 +41,6 @@ class InputBox(object):
         self.text = text
         self.txt_surface = FONT.render(text, True, self.color)
         self.active = False
-
 
     def handle_event(self, event):
 
@@ -66,7 +59,10 @@ class InputBox(object):
                     self.player = Player()
                     self.player.name = self.text
                     self.player.greetings()
+
                     game1 = Game(self.player.name, self.player.battles, self.player.victories)
+                    # self.player.update_warrior( True)
+                    game1.game_over()
 
                 elif event.key == pygame.K_BACKSPACE:
                     self.text = self.text[:-1]
@@ -74,8 +70,6 @@ class InputBox(object):
                     self.text += event.unicode
                 # Re-render the text.
                 self.txt_surface = FONT.render(self.text, True, self.color)
-
-
 
     def update(self):
         # Resize the box if the text is too long.
@@ -89,16 +83,13 @@ class InputBox(object):
         pygame.draw.rect(screen, self.color, self.rect, 2)
 
 
-
-
-
-
 class Background(pygame.sprite.Sprite):
     def __init__(self, image_file, location):
         pygame.sprite.Sprite.__init__(self)  # Call Sprite Initializer
         self.image = pygame.image.load(image_file)
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = location
+
 
 class Gallows(pygame.sprite.Sprite):
     def __init__(self, image_file,  location):
@@ -116,6 +107,7 @@ class Grid(pygame.sprite.Sprite):
     HEIGHT_LETTER_BOX = 50
     LETTERS = [['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'],
                ['N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']]
+
     def __init__(self, ):
         pygame.sprite.Sprite.__init__(self)
         self.table = []
@@ -125,7 +117,6 @@ class Grid(pygame.sprite.Sprite):
             self.table.append([])
             for column in range(13):
                 self.table[row].append(LETTERS[row][column])  # Append a cell
-
 
     def blinking (self):
 
@@ -152,7 +143,6 @@ class Grid(pygame.sprite.Sprite):
                 # self.guess = self.table[row][column]
                 print((self.table[row][column]))
                 return self.table[row][column]
-
 
     def update(self):
         self.blinking()
@@ -184,10 +174,8 @@ class Player(object) :
             pickle.dump(history, f1)
             f1.close()
             Player.update_warrior(self, vic=None)
-            game = Game(self.name, self.battles, self.victories)
-            game.game_over()
-        print("History book : \n", history)
 
+        print("History book : \n", history)
 
     # Define Getters
 
@@ -198,9 +186,8 @@ class Player(object) :
         return history
 
     def set_warrior_infos(self):
-        self.battles =0
-        self.victories =0
-
+        self.battles = 0
+        self.victories = 0
 
     def print_stats(self):
         print("Warrior ", self.name)
@@ -221,29 +208,34 @@ class Player(object) :
                 # Update battles
                 self.battles += 1
 
+        print('before dumping',history)
+        history[self.name] = (self.battles, self.victories)
         f1 = open('historydict,p', 'wb')
         pickle.dump(history, f1)
         f1.close()
         Player.print_stats(self)
-        return self.battles, self.victories
+        Player.print_all_warriors(self)
 
     def print_all_warriors(self):
         history = Player.get_warrior_infos(self)
         print(history)
 
-
-
 class Game(object):
     def __init__(self, name, battles, victories):
-        Player.__init__(self, name, battles, victories)
+
+        Player().__init__(Player(), name, battles, victories)
         self.name = name
         self.battles = battles
         self.victories = victories
+
         print('From Game class name is  ', self.name)
 
     def game_over(self):
-        self.result = Player.update_warrior(self,  1)
-        return self.result
+        print('This is after game_over')
+        Player.update_warrior(self, False)
+
+
+
 
 
 # Define some colors
@@ -298,12 +290,7 @@ while not done:
 
             # Player.greetings(player1)
             Grid.update(grid1)
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_DOWN :
-                player1 = Player()
-                game1 = Game(Player(player1).name, Player(player1).battles, Player(player1).victories)
 
-                print('from the main loop', Player().name)
 
 
 
