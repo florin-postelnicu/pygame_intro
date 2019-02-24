@@ -1,10 +1,11 @@
 '''
-The text in draw_text(text) should be string or bites.
-If a message has numerical characters,
-than it should be converted to a string
- str(message)
- For pygame.draw check :
- https://www.pygame.org/docs/ref/draw.html#pygame.draw.rect
+Version 5
+Game class + some methods that could work in GC
+Game class is a sub class of Player(), such that methods in Player()
+can be used in GC, for that specific instance defined in Player()
+The instance player of Player() it is created in class InputBox(), and 
+it is transferable to Game().
+One may say that Game() references player instance of pPayer()
 '''
 import pygame
 import os
@@ -236,8 +237,6 @@ class Game(object):
 
 
 
-
-
 # Define some colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -272,11 +271,6 @@ input_box2 = InputBox(100, 300, 140, 32)
 input_boxes = [input_box1, input_box2]
 allsprites = pygame.sprite.Group()
 grid1 = Grid()
-game = Game
-
-
-
-
 
 BckG = Background('bkg.jpg', [0,0])
 # --------------Main Program Loop -------------
@@ -292,11 +286,6 @@ while not done:
             Grid.update(grid1)
 
 
-
-
-
-
-
     # Game Logic should go here
         input_box1.handle_event(event)
 
@@ -306,15 +295,11 @@ while not done:
     # Here we clear the screen to white. Don't put other drawing commands
     #  above this , or they will be erased with this command
 
-    # If you want a background image, replace this clear with
-
     screen.blit(BckG.image, BckG.rect)
 
     # --------Drawing code should go here
     input_box1.draw(screen)
-    # rect 0 is for practice
-    # rect0 = pygame.draw.rect(screen, YELLOW, [50, 100, 300, 100], 1)
-    # screen.blit(draw_text(Grid.guess(grid1), 30), [60, 120])
+   
     # rect1 is for the secret word
 
     rect1 = pygame.draw.rect(screen, YELLOW, [50, 400, 50*(len(word)-1), 100], 3)
@@ -331,11 +316,6 @@ while not done:
     Grid.drawgrid(grid1)
     Grid.blinking(grid1)
 
-    # for row in range(2):
-    #     for column in range(13):
-    #         # blinking()
-    #         screen.blit(draw_text(grid[row][column], 50), [50 + 50 * column, 550 + 50 * row])
-
     # allsprites.update()
     # screen.fill(BLACK)
     # ------Limit 60 frames per second
@@ -345,11 +325,7 @@ while not done:
     # if the classes have attributes images , then allsprites.draw()
     # allsprites.draw(screen)
 
-
-
     pygame.display.flip()
-
-
 
     # Close the window and quit.
 pygame.quit()
