@@ -26,6 +26,8 @@ var1 = os.path.join("images , 'img1.png)
   If the image needs to be blit to another place( it might be a sprite representing
   a player, or an enemy, etc) , you have to do it in the drawing area of your main loop
 
+Check the pygame.transform a pygame module to transform surfaces
+https://www.pygame.org/docs/ref/transform.html?highlight=pygame%20transform#module-pygame.transform
 
 '''
 
