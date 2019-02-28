@@ -1,16 +1,41 @@
 
 
 
-# The size of a sprite in this example is 64x64 pixels.
-# x_coord = 64 * 2  # This would be the third column.
-# y_coord = 64 * 3  # Fourth row.
-# width = 64
-# height = 64
-#
-#
-#
-# sheet = pygame.image.load('your_sprite_sheet.png').convert_alpha()
-# single_image = sheet.subsurface((x_coord, y_coord, width, height))
+ 
+'''
+The size of a sprite in this example is 64x64 pixels.
+The sprite-sheet rob2.png is a 6 rows  by 9 columns.
+Step1 Load the whole sprite-sheet
+    page = os.path.join('images', 'rob2.png')
+    sheet = pygame.image.load(page).convert_alpha()
+    
+Step 2 Break the sprite-sheet in 54 independent images , reading one-by-one,
+and append each such independent image(frame) to the list of frames.
+
+   ind_images = []
+   for row in range(9):
+        for column in range(6):
+
+            single_image = sheet.subsurface((64*row, 64*column, 64, 64))
+            ind_images.append(single_image)
+
+Step 3 Set up the ticking clock for displaying the frames in the list of frames
+
+    nextFrame = pygame.time.get_ticks()
+    frame = 0
+
+Step 4 Inside the main loop blit in order every one of the frames in your list,
+by allowing a time of 50 miliseconds between every other frame.
+
+
+     now = pygame.time.get_ticks()
+     if  now - nextFrame> 50:
+         frame = (frame +1) %len(ind_images)
+         screen.blit(ind_images[frame], ( aero_x, aero_y))
+         nextFrame = now
+
+
+'''
 
 
 import pygame
