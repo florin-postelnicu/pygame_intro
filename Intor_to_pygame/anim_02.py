@@ -70,49 +70,73 @@ for row in range(9):
         ind_images.append(single_image)
 nextFrame = pygame.time.get_ticks()
 frame = 0
-
+aero_x = 200
+aero_y = 200
+aero_change_x = 0
+aero_change_y = 0
 #--------------Main Program Loop -------------
 while not done:
     #---Main event loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-    for item in ind_images:
-        # Game Logic should go here
-
-        # Screen clearing goes here
-
-        #Here we clear the screen to white. Don't put other drawing commands
-        #  above this , or they will be erased with this command
-
-        #If you want a background image, replace this clear with
-        # blit' ing the background image.
-
-        screen.fill(WHITE)
-        screen.blit(BckG , (0, 0))
-
-        #--------Drawing code should go here
-        # blit the gallows here
-        screen.blit(miau, (450, 250))
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                aero_change_x -= 10
+            elif event.key == pygame.K_RIGHT:
+                aero_change_x +=10
+            elif event.key == pygame.K_UP:
+                aero_change_y -=10
+            elif event.key == pygame.K_DOWN:
+                aero_change_y +=10
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT:
+                aero_change_x = 0
+            elif event.key == pygame.K_DOWN or event.key == pygame.K_UP:
+                aero_change_y = 0
 
 
-        #---------Update thje screen with what we have drawn
+    # Game Logic should go here
+    if aero_x < 0 or aero_x> (WIDTH -64) or aero_y < 0 or aero_y > (HEIGHT - 64):
+        aero_x += -1* aero_change_x
+        aero_y += -1*aero_change_y
+    else :
+        aero_x = aero_x + aero_change_x
+        aero_y = aero_y + aero_change_y
 
-        now = pygame.time.get_ticks()
-        if  now - nextFrame> 50:
-            frame = (frame +1) %len(ind_images)
-            screen.blit(ind_images[frame], ( 200, 200))
-            nextFrame = now
-        pygame.display.flip()
+    # Screen clearing goes here
+
+    #Here we clear the screen to white. Don't put other drawing commands
+    #  above this , or they will be erased with this command
+
+    #If you want a background image, replace this clear with
+    # blit' ing the background image.
+
+    screen.fill(BLACK)
+    screen.blit(BckG , (0, 0))
+
+    #--------Drawing code should go here
+    # blit the gallows here
+    screen.blit(miau, (450, 250))
+
+
+    #---------Update thje screen with what we have drawn
+
+    now = pygame.time.get_ticks()
+    if  now - nextFrame> 50:
+        frame = (frame +1) %len(ind_images)
+        screen.blit(ind_images[frame], ( aero_x, aero_y))
+        nextFrame = now
+    pygame.display.flip()
 
 
 
 
-        #------Limit 60 frames per second
-        clock.tick(60)
+    #------Limit 60 frames per second
+    clock.tick(60)
 
 
-    # Close the window and quit.
+# Close the window and quit.
 pygame.quit()
 
 
