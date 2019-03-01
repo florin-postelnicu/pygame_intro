@@ -1,7 +1,7 @@
 
 '''
 The size of a sprite in this example is 64x64 pixels.
-The sprite-sheet rob2.png is a 6 rows  by 9 columns.
+The sprite-sheet rob2.png is a 6 rows  by 9 columns.The numbers of the lines are given like in the program anim_01.py
 
 Step1 Load the whole sprite-sheet
 59   page = os.path.join('images', 'rob2.png')
