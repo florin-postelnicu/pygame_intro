@@ -88,10 +88,10 @@ BckG = pygame.image.load(bg)
 page = os.path.join('images', 'rob2.png')
 sheet = pygame.image.load(page).convert_alpha()
 ind_images = []
-for row in range(9):
-    for column in range(6):
+for column in range(9):
+    for row in range(6):
 
-        single_image = sheet.subsurface((64*row, 64*column, 64, 64))
+        single_image = sheet.subsurface((64*column, 64*row, 64, 64))
         ind_images.append(single_image)
 nextFrame = pygame.time.get_ticks()
 frame = 0
