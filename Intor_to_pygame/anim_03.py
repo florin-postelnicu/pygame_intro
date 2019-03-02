@@ -2,6 +2,9 @@
 The lists of sprites are reorganized, such that the order of rendering 
 them on the screen is the same as the order in which they are displayed
 on the sprite sheet.
+For each image_frame in animation the reference point is the center of the rectangale circumscribing it.
+   pos_image_frame = image_frame.get_rect()
+   pos_image_frame.center = image_frame_x, image_frame_y
 This way the animation is smooth enough.
 
 
@@ -55,9 +58,13 @@ BckG = pygame.image.load(bg)
 girl = os.path.join('images', 'girl_dancing.png')
 sheet_g = pygame.image.load(girl).convert_alpha()
 girl_list = []
+girl_x = 400
+girl_y = 400
 for row in range(7):
     for col in range(3):
         girl_frame = sheet_g.subsurface((95*row, 130*col,  95, 130))
+        pos_gril_frame = gril_frame.get_rect()
+        pos_girl_frame.center = girl_x, girl_y
         girl_list.append(girl_frame)
 list_0 =[]
 list_1 =[]
@@ -72,17 +79,22 @@ for i in range(len(girl_list)):
 girl_list = list_0 + list_1 + list_2
 # newGirl = pygame.time.get_ticks()
 item = 0
-girl_x = 400
-girl_y = 400
+
 
 
 page = os.path.join('images', 'rob2.png')
 sheet = pygame.image.load(page).convert_alpha()
 ind_images = []
+aero_x = 200
+aero_y = 200
+aero_change_x = 0
+aero_change_y = 0
 for row in range(9):
     for column in range(6):
 
         single_image = sheet.subsurface((64*row, 64*column, 64, 64))
+        pos_single_image = single_image.get_rect()
+        pos_single_image.center = aero_x, aero_y
         ind_images.append(single_image)
 blist_0 = []
 blist_1 = []
@@ -106,15 +118,9 @@ for j in range(len(ind_images)):
 
 ind_images = blist_0 + blist_1 + blist_2 + blist_3 + blist_4+ blist_5
 
-
-
-
 nextFrame = pygame.time.get_ticks()
 frame = 0
-aero_x = 200
-aero_y = 200
-aero_change_x = 0
-aero_change_y = 0
+
 #--------------Main Program Loop -------------
 while not done:
     #---Main event loop
