@@ -155,7 +155,7 @@ while not done:
 
     # screen.fill(BLACK)
     screen.blit(BckG , (0, 0))
-
+    screen.blit(miau, (450, 250))
     #--------Drawing code should go here
     # blit the gallows here
 
@@ -169,14 +169,15 @@ while not done:
         item = (item + 1) % len(girl_list)
         screen.blit(girl_list[item], (girl_x, girl_y))
         nextFrame = now
-    screen.blit(miau, (450, 250))
+        pygame.display.flip()
+    
 
     # nowg = pygame.time.get_ticks()
     # if nowg - newGirl > 60:
     #     item = (item + 1)%len(girl_list)
     #     screen.blit(girl_list[item], (girl_x, girl_y))
     #     newGirl = nowg
-    pygame.display.flip()
+  
 
 
     #------Limit 60 frames per second
