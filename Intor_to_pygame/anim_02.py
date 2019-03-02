@@ -152,7 +152,7 @@ while not done:
         frame = (frame +1) %len(ind_images)
         screen.blit(ind_images[frame], ( aero_x, aero_y))
         nextFrame = now
-    pygame.display.flip()
+        pygame.display.flip()
 
 
 
