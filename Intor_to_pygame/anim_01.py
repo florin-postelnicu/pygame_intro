@@ -105,8 +105,9 @@ while not done:
         frame = (frame + 1) % len(ind_images)
         screen.blit(ind_images[frame], (aero_x, aero_y))
         nextFrame = now
+        pygame.display.flip()
     # End of Step 4
-    pygame.display.flip()
+  
 
     # ------Limit 60 frames per second
     clock.tick(60)
