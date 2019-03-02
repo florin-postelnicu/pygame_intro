@@ -2,10 +2,13 @@
 The lists of sprites are reorganized, such that the order of rendering 
 them on the screen is the same as the order in which they are displayed
 on the sprite sheet.
+
+The next technique is very common in animation; the point (coordinates) referencing the image it is 
+associated to its center (like in physics, center of gravity).
 For each image_frame in animation the reference point is the center of the rectangale circumscribing it.
    pos_image_frame = image_frame.get_rect()
    pos_image_frame.center = image_frame_x, image_frame_y
-This way the animation is smooth enough.
+This way the animation is smooth enough, and the jittering of the image is eliminaated.
 
 
 '''
@@ -43,15 +46,7 @@ done = False
 
 # Use how fast the screen updates
 clock = pygame.time.Clock()
-# create a path to join the folder 'images' with the file 'kitten.png
-ktn = os.path.join('images', 'kitten2.png')
-# Make the background of the kitten sprite transparent using .convert_alpha()
-miau = pygame.image.load(ktn).convert_alpha()
-# use transformations to flip the kitten on the x_axis, by making True
-# the corresponding field, and False the other
-# pygame.transform.flip( image, flip_x, flip_y)
-miau = pygame.transform.flip( miau, True, False )
-miau = pygame.transform.rotozoom(miau, 36, .50)
+
 
 bg = os.path.join('images', 'bkg.jpg')
 BckG = pygame.image.load(bg)
@@ -60,9 +55,9 @@ sheet_g = pygame.image.load(girl).convert_alpha()
 girl_list = []
 girl_x = 400
 girl_y = 400
-for row in range(7):
-    for col in range(3):
-        girl_frame = sheet_g.subsurface((95*row, 130*col,  95, 130))
+for column in range(7):
+    for row in range(3):
+        girl_frame = sheet_g.subsurface((95*column, 130*row,  95, 130))
         pos_gril_frame = gril_frame.get_rect()
         pos_girl_frame.center = girl_x, girl_y
         girl_list.append(girl_frame)
@@ -89,10 +84,10 @@ aero_x = 200
 aero_y = 200
 aero_change_x = 0
 aero_change_y = 0
-for row in range(9):
-    for column in range(6):
+for column in range(9):
+    for row in range(6):
 
-        single_image = sheet.subsurface((64*row, 64*column, 64, 64))
+        single_image = sheet.subsurface((64*column, 64*row, 64, 64))
         pos_single_image = single_image.get_rect()
         pos_single_image.center = aero_x, aero_y
         ind_images.append(single_image)
@@ -153,19 +148,10 @@ while not done:
 
     # Screen clearing goes here
 
-    #Here we clear the screen to white. Don't put other drawing commands
-    #  above this , or they will be erased with this command
-
-    #If you want a background image, replace this clear with
-    # blit' ing the background image.
-
-    # screen.fill(BLACK)
     screen.blit(BckG , (0, 0))
     screen.blit(miau, (450, 250))
     #--------Drawing code should go here
-    # blit the gallows here
-
-
+ 
     #---------Update thje screen with what we have drawn
 
     now = pygame.time.get_ticks()
@@ -177,15 +163,6 @@ while not done:
         nextFrame = now
         pygame.display.flip()
     
-
-    # nowg = pygame.time.get_ticks()
-    # if nowg - newGirl > 60:
-    #     item = (item + 1)%len(girl_list)
-    #     screen.blit(girl_list[item], (girl_x, girl_y))
-    #     newGirl = nowg
-  
-
-
     #------Limit 60 frames per second
     clock.tick(60)
 
