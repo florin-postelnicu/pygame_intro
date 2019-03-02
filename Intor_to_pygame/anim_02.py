@@ -73,15 +73,6 @@ pygame.display.set_caption('Template for Pygame Programs')
 done = False
 # Use how fast the screen updates
 clock = pygame.time.Clock()
-# create a path to join the folder 'images' with the file 'kitten.png
-ktn = os.path.join('images', 'kitten2.png')
-# Make the background of the kitten sprite transparent using .convert_alpha()
-miau = pygame.image.load(ktn).convert_alpha()
-# use transformations to flip the kitten on the x_axis, by making True
-# the corresponding field, and False the other
-# pygame.transform.flip( image, flip_x, flip_y)
-miau = pygame.transform.flip( miau, True, False )
-miau = pygame.transform.rotozoom(miau, 45, .50)
 
 bg = os.path.join('images', 'bkg.jpg')
 BckG = pygame.image.load(bg)
@@ -131,18 +122,11 @@ while not done:
 
     # Screen clearing goes here
 
-    #Here we clear the screen to white. Don't put other drawing commands
-    #  above this , or they will be erased with this command
-
-    #If you want a background image, replace this clear with
-    # blit' ing the background image.
-
-    screen.fill(BLACK)
     screen.blit(BckG , (0, 0))
 
     #--------Drawing code should go here
-    # blit the gallows here
-    screen.blit(miau, (450, 250))
+  
+
 
 
     #---------Update thje screen with what we have drawn
