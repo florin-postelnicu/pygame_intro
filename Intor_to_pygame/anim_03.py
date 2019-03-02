@@ -1,6 +1,6 @@
 '''
-The lists of sprites are reorganized, such that the order of their
-blitting on the screen is the same as the order in which they are displayed
+The lists of sprites are reorganized, such that the order of rendering 
+them on the screen is the same as the order in which they are displayed
 on the sprite sheet.
 This way the animation is smooth enough.
 
