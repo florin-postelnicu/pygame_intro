@@ -71,9 +71,12 @@ sheet = pygame.image.load(page).convert_alpha()
 # End of Step1
 # Step 2
 ind_images = []
-for row in range(9):
-    for column in range(6):
-        single_image = sheet.subsurface((64 * row, 64 * column, 64, 64))
+for column in range(9):
+    for row in range(6):
+         # Make sure to reverse the 'natural' order for a matrix entry indexes,
+         # column is the first , and row is the second.
+         # The sprite sheet is divided alongside columns, starting from the left upper corner.
+        single_image = sheet.subsurface((64 * column, 64 * row, 64, 64))
         ind_images.append(single_image)
 # End of Step 3
 # Step 3
