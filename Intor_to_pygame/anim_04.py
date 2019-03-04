@@ -39,21 +39,16 @@ class AnimGirl(pygame.sprite.Sprite):
 
 
     def anim_girl(self):
-
-            screen.blit(girl_list[self.frame], self.pos)
-
+        pass
 
     def update(self):
-        self.anim_girl()
         now = pygame.time.get_ticks()
-
+        screen.blit(girl_list[self.frame], self.pos)
         if now - self.last_update > 100:
             self.frame = (self.frame + 1) % len(girl_list)
             self.last_update = now
 
-#
-
-
+            
 class Aerocam(pygame.sprite.Sprite):
 
     def __init__(self, x, y, ind_images):
@@ -71,13 +66,11 @@ class Aerocam(pygame.sprite.Sprite):
         self.last_update = pygame.time.get_ticks()
 
     def anim_aero(self):
+        pass
 
-        screen.blit(ind_images[self.frame], self.pos)
-
-    def update(self):
-        self.anim_aero()
+    def update(self):       
         now = pygame.time.get_ticks()
-
+        screen.blit(ind_images[self.frame], self.pos)
         if now - self.last_update > 100:
             self.frame = (self.frame + 1) % (len(ind_images))
             self.last_update = now
