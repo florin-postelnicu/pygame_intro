@@ -9,6 +9,8 @@ allsprites.update() function.
 girl_dancing is an instance for class AnimGirl, while
 aero is an instance of AeroCam class.
 Each one of these objects have been added to allsprites group.
+The motion of aero camera is done in the AeroCam method
+move_aero()
 
 
 
@@ -64,14 +66,40 @@ class Aerocam(pygame.sprite.Sprite):
         self.last_update = pygame.time.get_ticks()
 
     def anim_aero(self):
-        pass
-
-    def update(self):       
+        
         now = pygame.time.get_ticks()
         screen.blit(ind_images[self.frame], self.pos)
         if now - self.last_update > 100:
             self.frame = (self.frame + 1) % (len(ind_images))
             self.last_update = now
+    def move_aero(self):
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            self.aero_change_x -= 1
+        if keys[pygame.K_RIGHT]:
+            self.aero_change_x += 1
+        if keys[pygame.K_DOWN]:
+            self.aero_change_y += 1
+        if keys[pygame.K_UP]:
+            self.aero_change_y -= 1
+        if keys[pygame.K_SPACE]:
+            self.aero_change_y = 0
+            self.aero_change_x = 0
+        if self.x < 0 or self.x > WIDTH:
+            self.aero_change_x *= -1
+        if self.y <0 or self.y > HEIGHT:
+            self.aero_change_y *= -1
+
+        self.x += self.aero_change_x
+        self.y += self.aero_change_y
+        self.rect.center = (self.x, self.y)
+        self.pos = (self.x, self.y)
+     
+    def update(self):
+        self.anim_aero()
+        self.move_aero()
+
 
 
 # Define some colors
