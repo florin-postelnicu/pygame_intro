@@ -39,7 +39,7 @@ WIDTH = 1200
 HEIGHT = 700
 size = ( WIDTH, HEIGHT)
 screen = pygame.display.set_mode(size, pygame.HWSURFACE|pygame.DOUBLEBUF)
-pygame.display.set_caption('Template for Pygame Programs')
+pygame.display.set_caption('Animation 3 , Position = Center, Correct Order of Frames')
 
 # Loop until the user clicks the close button
 done = False
