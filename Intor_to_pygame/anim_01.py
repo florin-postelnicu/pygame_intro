@@ -27,13 +27,7 @@ by allowing a time of 50 miliseconds between every other frame.
           screen.blit(ind_images[frame], ( aero_x, aero_y))
           nextFrame = now
 
-
-Note !
-      screen.fill(BLACK) 
-or (WHITE) should be placed before blitting the background.
-Its purpose is to hide the previous frame when the next one is blit.
 '''
-
 
 import pygame
 import os
@@ -93,13 +87,7 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
 
-
-
-    screen.fill(BLACK)
     screen.blit(BckG, (0, 0))
-
-
-
 
     # ---------Update thje screen with what we have drawn
     # Step 4
