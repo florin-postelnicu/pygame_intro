@@ -21,9 +21,7 @@ import os
 vec = pygame.math.Vector2
 # classes
 
-
 class AnimGirl(pygame.sprite.Sprite):
-
 
     def __init__(self, x, y, girl_list):
         pygame.sprite.Sprite.__init__(self, allsprites)
@@ -85,11 +83,6 @@ RED = (255, 0 , 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 
-
-
-
-
-
 pygame.init()
 
 # Set the WIDTH and the HEIGHT for the screen
@@ -105,12 +98,11 @@ done = False
 
 # Use how fast the screen updates
 clock = pygame.time.Clock()
-# create a path to join the folder 'images' with the file 'kitten.png
-ktn = os.path.join('images', 'kitten2.png')
 
 # Load background image
 bg = os.path.join('images', 'bkg.jpg')
 BckG = pygame.image.load(bg)
+
 # load the girl frames for animation, and create the list for these frames
 girl = os.path.join('images', 'girl_dancing.png')
 sheet_g = pygame.image.load(girl).convert_alpha()
@@ -169,11 +161,11 @@ for j in range(len(ind_images)):
         blist_4.append(ind_images[j])
     else :
         blist_5.append(ind_images[j])
-
 ind_images = blist_0 + blist_1 + blist_2 + blist_3 + blist_4+ blist_5
 
 # Create allsprites group for rendering each sprite through only one command allsprites.update()
 allsprites = pygame.sprite.Group()
+
 # Generate instances for each class , and add them to the allsprites
 girl_dancing = AnimGirl(400,400, girl_list)
 allsprites.add(girl_dancing)
@@ -186,62 +178,20 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-    #     if event.type == pygame.KEYDOWN:
-    #
-    #         if event.key == pygame.K_LEFT:
-    #             aero_change_x -= 10
-    #         elif event.key == pygame.K_RIGHT:
-    #             aero_change_x += 10
-    #         elif event.key == pygame.K_UP:
-    #             aero_change_y -= 10
-    #         elif event.key == pygame.K_DOWN:
-    #             aero_change_y += 10
-    #     if event.type == pygame.KEYUP:
-    #         if event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT:
-    #             aero_change_x = 0
-    #         elif event.key == pygame.K_DOWN or event.key == pygame.K_UP:
-    #             aero_change_y = 0
-    #
-    #
-    # # Game Logic should go here
-    # if aero_x < 0 or aero_x> (WIDTH -64) or aero_y < 0 or aero_y > (HEIGHT - 64):
-    #     aero_x += -1* aero_change_x
-    #     aero_y += -1*aero_change_y
-    # else :
-    #     aero_x = aero_x + aero_change_x
-    #     aero_y = aero_y + aero_change_y
+    
 
-    # Screen clearing goes here
-
-    #Here we clear the screen to white. Don't put other drawing commands
-    #  above this , or they will be erased with this command
-
-    #If you want a background image, replace this clear with
-    # blit' ing the background image.# aero_x = 200
-# aero_y = 200
-
-    screen.fill(BLACK)
     screen.blit(BckG , (0, 0))
-
 
     #--------Drawing code should go here
     # blit the gallows here
-
 
     #---------Update thje screen with what we have drawn
 
     allsprites.update()
     pygame.display.flip()
 
-
-
-
     #------Limit 60 frames per second
     clock.tick(60)
 
-
-
 # Close the window and quit.
 pygame.quit()
-
-
