@@ -55,7 +55,7 @@ WIDTH = 1200
 HEIGHT = 700
 size = ( WIDTH, HEIGHT)
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption('Template for Pygame Programs')
+pygame.display.set_caption('Animation 1 , Cropping the Sprite Sheet, Animation Process')
 
 done = False
 
