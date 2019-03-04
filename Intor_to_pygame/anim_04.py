@@ -1,8 +1,15 @@
 '''
-The lists of sprites are reorganized, such that the order of rendering
-them on the screen is the same as the order in which they are displayed
-on the sprite sheet.
-This way the animation is smooth enough.
+For each object animated a special class has been created.
+class AnimGirl
+class AeroCam
+
+The animation sequencing is done in update method corresponding to each class,
+thaus the animation is controlled only by the
+allsprites.update() function.
+girl_dancing is an instance for class AnimGirl, while
+aero is an instance of AeroCam class.
+Each one of these objects have been added to allsprites group.
+
 
 
 '''
@@ -172,25 +179,12 @@ for j in range(len(ind_images)):
 
 ind_images = blist_0 + blist_1 + blist_2 + blist_3 + blist_4+ blist_5
 
-
-
-
-nextFrame = pygame.time.get_ticks()
-frame = 0
-item = 0
-
-# aero_change_x = 0
-# aero_change_y = 0
-
+# Create allsprites group for rendering each sprite through only one command allsprites.update()
 allsprites = pygame.sprite.Group()
-anim_girls =pygame.sprite.Group()
+# Generate instances for each class , and add them to the allsprites
 girl_dancing = AnimGirl(400,400, girl_list)
 allsprites.add(girl_dancing)
-anim_girls.add(girl_dancing)
-
 aero = Aerocam(200, 200, ind_images)
-aero_cams = pygame.sprite.Group()
-aero_cams.add(aero)
 allsprites.add(aero)
 
 #--------------Main Program Loop -------------
@@ -230,7 +224,8 @@ while not done:
     #  above this , or they will be erased with this command
 
     #If you want a background image, replace this clear with
-    # blit' ing the background image.
+    # blit' ing the background image.# aero_x = 200
+# aero_y = 200
 
     screen.fill(BLACK)
     screen.blit(BckG , (0, 0))
