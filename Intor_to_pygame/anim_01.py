@@ -78,7 +78,7 @@ for column in range(9):
          # The sprite sheet is divided alongside columns, starting from the left upper corner.
         single_image = sheet.subsurface((64 * column, 64 * row, 64, 64))
         ind_images.append(single_image)
-# End of Step 3
+# End of Step 2
 # Step 3
 nextFrame = pygame.time.get_ticks()
 frame = 0
