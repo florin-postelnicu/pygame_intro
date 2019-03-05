@@ -56,11 +56,7 @@ class Aerocam(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
         self.pos = vec(self.x, self.y)
-        # self.aero_change_x = 0
-        # self.aero_change_y = 0
         self.vel = vec(0,0 )
-        self.acc = vec(0.05,0)
-        self.fric = vec(-0.06, 0)
         self.last_update = pygame.time.get_ticks()
 
     def anim_aero(self):
@@ -76,16 +72,16 @@ class Aerocam(pygame.sprite.Sprite):
         self.aero_change_x = 0
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            self.aero_change_x -= 10
+            self.aero_change_x -= 20
         if keys[pygame.K_RIGHT]:
-            self.aero_change_x += 10
+            self.aero_change_x += 20
         if keys[pygame.K_DOWN]:
-            self.aero_change_y += 10
+            self.aero_change_y += 20
         if keys[pygame.K_UP]:
-            self.aero_change_y -= 10
-        if self.aero_change_x != 0 and self.aero_change_x != 0:
-            self.aero_change_x *= 1.7071
-            self.aero_change_y *= 1.7071
+            self.aero_change_y -= 20
+
+        if keys[pygame.K_SPACE]:
+            self.shoot()
         if self.x < 0 or self.x > WIDTH:
             self.aero_change_x *= -1
         if self.y < 0 or self.y > HEIGHT:
@@ -98,25 +94,35 @@ class Aerocam(pygame.sprite.Sprite):
         # self.vel += self.acc - self.fric
         self.pos += self.vel
 
+    def shoot(self):
+        bullet = Bullet(self.rect.centerx, self.rect.top)
+        allsprites.add(bullet)
+        bullets.add(bullet)
+
     def update(self):
         self.anim_aero()
         self.move_aero()
 
 
+
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y):
-        pygame.sprite.Sprite.__init__(self, bullets)
-        self.x = x
-        self.y = y
-        self.image = bullet_image
+        pygame.sprite.Sprite.__init__(self)
+        # self.x = x
+        # self.y = y
+        self.image = pygame.Surface((10, 20))
+        self.image.fill(YELLOW)
         self.rect = self.image.get_rect()
-        self.rect.center = (self.x, self.y)
-        self.pos = vec(self.x, self.y)
-        self.acc = vec(0, 0.5)
-        self.vel = (0, 0)
-        self.last_update = pygame.time.get_ticks()
 
+        self.rect.top = y + 32
+        self.rect.centerx = x + 32
+        self.speedy = -30
 
+    def update(self):
+        self.rect.y += self.speedy
+        # kill if it moves off the top of the screen
+        if self.rect.bottom < 0:
+            self.kill()
 # Define some colors
 
 BLACK = (0, 0, 0)
@@ -211,6 +217,7 @@ allsprites = pygame.sprite.Group()
 girl_dancing = AnimGirl(400, 400, girl_list)
 allsprites.add(girl_dancing)
 aero = Aerocam(200, 200, ind_images)
+bullets = pygame.sprite.Group()
 allsprites.add(aero)
 
 # --------------Main Program Loop -------------
@@ -219,6 +226,9 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+        # elif event.type == pygame.KEYDOWN:
+        #     if event.key == pygame.K_SPACE:
+        #         aero.shoot()
 
     screen.blit(BckG, (0, 0))
 
@@ -228,6 +238,7 @@ while not done:
     # ---------Update thje screen with what we have drawn
 
     allsprites.update()
+    bullets.draw((screen))
     pygame.display.flip()
 
     # ------Limit 60 frames per second
