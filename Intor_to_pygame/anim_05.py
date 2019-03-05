@@ -56,8 +56,8 @@ class Aerocam(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
         self.pos = vec(self.x, self.y)
-        self.aero_change_x = 0
-        self.aero_change_y = 0
+        # self.aero_change_x = 0
+        # self.aero_change_y = 0
         self.vel = vec(0,0 )
         self.acc = vec(0.05,0)
         self.fric = vec(-0.06, 0)
@@ -84,8 +84,8 @@ class Aerocam(pygame.sprite.Sprite):
         if keys[pygame.K_UP]:
             self.aero_change_y -= 10
         if self.aero_change_x != 0 and self.aero_change_x != 0:
-            self.aero_change_x *= 0.7071
-            self.aero_change_y *= 0.7071
+            self.aero_change_x *= 1.7071
+            self.aero_change_y *= 1.7071
         if self.x < 0 or self.x > WIDTH:
             self.aero_change_x *= -1
         if self.y < 0 or self.y > HEIGHT:
