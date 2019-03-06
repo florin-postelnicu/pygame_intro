@@ -140,7 +140,7 @@ WIDTH = 1200
 HEIGHT = 700
 size = (WIDTH, HEIGHT)
 screen = pygame.display.set_mode(size, pygame.HWSURFACE | pygame.DOUBLEBUF)
-pygame.display.set_caption('Template for Pygame Programs')
+pygame.display.set_caption('aero.shoot() with control inside the method')
 
 # Loop until the user clicks the close button
 done = False
@@ -226,14 +226,10 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-        # elif event.type == pygame.KEYDOWN:
-        #     if event.key == pygame.K_SPACE:
-        #         aero.shoot()
-
+      
     screen.blit(BckG, (0, 0))
 
     # --------Drawing code should go here
-    # blit the gallows here
 
     # ---------Update thje screen with what we have drawn
 
