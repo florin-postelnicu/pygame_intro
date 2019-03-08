@@ -2,19 +2,7 @@
 The areo shoots in the direction of displacement.
 If still, the aero shoots vertically.
 '''
-'''
-For each object animated a special class has been created.
-class AnimGirl
-class AeroCam
-The animation sequencing is done in update method corresponding to each class,
-thaus the animation is controlled only by the
-allsprites.update() function.
-girl_dancing is an instance for class AnimGirl, while
-aero is an instance of AeroCam class.
-Each one of these objects have been added to allsprites group.
-The motion of aero camera is done in the AeroCam method
-move_aero()
-'''
+
 
 import pygame
 import os
@@ -85,7 +73,7 @@ class Aerocam(pygame.sprite.Sprite):
 
         if keys[pygame.K_SPACE]:
             self.aero_change_y *= 2
-            self.aero_change_x *= 2
+             self.aero_change_x *= 2
             self.shoot()
         if self.x < 0 or self.x > WIDTH:
             self.aero_change_x *= -1
@@ -96,7 +84,6 @@ class Aerocam(pygame.sprite.Sprite):
         self.y += self.aero_change_y
         self.rect.center = (self.x, self.y)
         self.velo = (self.aero_change_x, self.aero_change_y)
-        # self.vel += self.acc - self.fric
         self.pos += self.velo
 
     def shoot(self):
@@ -120,7 +107,6 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.top = y + 32
         self.rect.centerx = x + 32
         self.pos = vec(self.rect.x, self.rect.y)
-        # self.speedy = -30
         self.bullet_clock = pygame.time.get_ticks()
         self.vel = vel
 
@@ -133,8 +119,6 @@ class Bullet(pygame.sprite.Sprite):
             self.pos += vec(self.vel )
             screen.blit(self.image, self.pos)
             self.bullet_clock = now
-
-        # self.rect.y += self.speedy
         # kill if it moves off the top of the screen
         if self.rect.bottom < 0: # out of the screen's frame
             self.kill()
@@ -171,13 +155,10 @@ BckG = pygame.image.load(bg)
 girl = os.path.join('images', 'girl_dancing.png')
 sheet_g = pygame.image.load(girl).convert_alpha()
 girl_list = []
-# girl_x = 400
-# girl_y = 400
+
 for column in range(7):
     for row in range(3):
         girl_frame = sheet_g.subsurface((95 * column, 130 * row, 95, 130))
-        # pos_girl = girl_frame.get_rect()
-        # pos_girl.center = girl_x, girl_y
         girl_list.append(girl_frame)
 list_0 = []
 list_1 = []
@@ -196,8 +177,6 @@ page = os.path.join('images', 'rob2.png')
 sheet = pygame.image.load(page).convert_alpha()
 
 ind_images = []
-# aero_x = 200
-# aero_y = 200
 for column in range(9):
     for row in range(6):
         single_image = sheet.subsurface((64 * column, 64 * row, 64, 64))
@@ -248,7 +227,6 @@ while not done:
     # ---------Update the screen with what we have drawn
 
     allsprites.update()
-    # bullets.draw(screen) # if allsprites.draw(screen) then aero appears twice
     pygame.display.flip()
 
     # ------Limit 60 frames per second
